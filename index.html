@@ -1,0 +1,483 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Le Van Tung · Full-Stack Engineer</title>
+<meta name="description" content="Full-stack engineer and team lead building commerce, loyalty and integration systems for Vietnamese retail.">
+<meta property="og:title" content="Le Van Tung · Full-Stack Engineer">
+<meta property="og:description" content="I build the systems Vietnamese retail runs on.">
+<meta property="og:image" content="https://lvtung-dev.github.io/img/rd-ai-seen.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://lvtung-dev.github.io/">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#12100e">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2312100e'/%3E%3Ccircle cx='16' cy='16' r='6' fill='%23f4a76b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  color-scheme: dark;
+  --bg: #12100e; --bg-2: #1a1613;
+  --surface: rgba(255, 236, 220, .04); --line: rgba(255, 220, 190, .13);
+  --text: #f6efe9; --muted: #b9ada3;
+  --amber: #f4a76b; --amber-soft: #ffd2a0;
+  --mint: #8fd8b8; --on-light: #24130a;
+  --fs-xs: 12px; --fs-sm: 14px; --fs-md: 16px; --fs-lg: 20px; --fs-xl: 28px;
+  --fs-h2: clamp(32px, 4.4vw, 52px); --fs-h1: clamp(44px, 6.4vw, 88px);
+  --sans: "IBM Plex Sans", system-ui, sans-serif; --mono: "JetBrains Mono", ui-monospace, monospace;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --radius: 20px;
+}
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text); font: 400 var(--fs-md)/1.6 var(--sans);
+  padding-bottom: env(safe-area-inset-bottom, 0px); overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+a { color: inherit; }
+:focus-visible { outline: 2px solid var(--amber-soft); outline-offset: 3px; border-radius: 6px; }
+.wrap { max-width: 1160px; margin: 0 auto; padding-inline: max(20px, env(safe-area-inset-left, 0px)); }
+.skip { position: absolute; left: 12px; top: -60px; padding: 10px 14px; background: var(--amber); color: var(--on-light); border-radius: 10px; z-index: 50; }
+.skip:focus { top: calc(12px + env(safe-area-inset-top, 0px)); }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.kicker { font: 500 var(--fs-xs)/1.4 var(--mono); letter-spacing: .12em; text-transform: uppercase; color: var(--mint); }
+h1, h2, h3 { margin: 0; letter-spacing: -.02em; text-wrap: balance; }
+p { margin: 0; text-wrap: pretty; }
+.i { width: 18px; height: 18px; flex: none; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+.btn {
+  display: inline-flex; align-items: center; gap: 10px; min-height: 48px; padding: 0 20px; border-radius: 999px;
+  font: 600 var(--fs-md)/1 var(--sans); text-decoration: none; cursor: pointer; border: 1px solid transparent;
+  transition: transform .25s var(--ease), background-color .25s, border-color .25s, box-shadow .25s;
+}
+.btn-primary { background: var(--amber); color: var(--on-light); box-shadow: 0 10px 40px -12px rgba(244, 167, 107, .7); }
+.btn-ghost { border-color: var(--line); color: var(--text); background: var(--surface); }
+@media (hover: hover) {
+  .btn:hover { transform: translateY(-2px); }
+  .btn-primary:hover { box-shadow: 0 16px 50px -12px rgba(244, 167, 107, .9); }
+  .btn-ghost:hover { border-color: rgba(255, 210, 160, .45); }
+}
+
+/* top bar */
+.top { position: sticky; top: 0; z-index: 20; padding-top: env(safe-area-inset-top, 0px);
+  background: rgba(18, 16, 14, .72); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid transparent; transition: border-color .3s; }
+.top.scrolled { border-bottom-color: var(--line); }
+.top .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; min-height: 64px; }
+.logo { display: inline-flex; align-items: center; min-height: 44px; min-width: 44px; font: 600 var(--fs-md)/1 var(--mono); text-decoration: none; letter-spacing: .04em; }
+.logo b { color: var(--amber); font-weight: 600; }
+.nav { display: flex; align-items: center; gap: 4px; }
+.nav a { font-size: var(--fs-sm); color: var(--muted); text-decoration: none; padding: 12px; border-radius: 10px; }
+.nav a:hover { color: var(--text); }
+.nav .btn { min-height: 44px; padding: 0 16px; font-size: var(--fs-sm); color: var(--text); margin-left: 8px; }
+
+/* hero */
+.hero { position: relative; isolation: isolate; padding-block: 72px 56px; }
+.hero::before {
+  content: ""; position: absolute; inset: -64px 0 0; z-index: -1; pointer-events: none;
+  background:
+    radial-gradient(50% 60% at 78% 30%, rgba(244, 167, 107, .16), transparent 70%),
+    radial-gradient(40% 50% at 10% 90%, rgba(143, 216, 184, .07), transparent 70%),
+    linear-gradient(rgba(255, 220, 190, .045) 1px, transparent 1px) 0 0 / 48px 48px,
+    linear-gradient(90deg, rgba(255, 220, 190, .045) 1px, transparent 1px) 0 0 / 48px 48px;
+  mask-image: linear-gradient(to bottom, #000 40%, transparent);
+  -webkit-mask-image: linear-gradient(to bottom, #000 40%, transparent);
+}
+.hero-grid { display: grid; grid-template-columns: 1.05fr 1fr; gap: 48px; align-items: center; }
+.hero h1 { font-size: var(--fs-h1); font-weight: 700; line-height: .98; margin-top: 18px; }
+.tagline { font-size: var(--fs-xl); font-weight: 500; line-height: 1.25; margin-top: 18px; max-width: 22ch; }
+.tagline em { font-style: normal; color: var(--amber); }
+.lead { color: var(--muted); margin-top: 16px; }
+.cta { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 32px; }
+.hero .kicker, .hero h1, .tagline, .lead, .cta { animation: enter .9s var(--ease) both; }
+.hero h1 { animation-delay: .08s; } .tagline { animation-delay: .16s; } .lead { animation-delay: .24s; } .cta { animation-delay: .32s; }
+@keyframes enter { from { opacity: 0; transform: translateY(14px); } }
+
+.map { width: 100%; height: auto; overflow: visible; animation: enter 1.2s .3s var(--ease) both; }
+.map .wire { fill: none; stroke: rgba(255, 210, 160, .28); stroke-width: 1.5; }
+.map .flow { fill: none; stroke: var(--amber); stroke-width: 2; stroke-dasharray: 3 14; stroke-linecap: round; animation: flow 1.6s linear infinite; }
+.map .flow.alt { stroke: var(--mint); animation-direction: reverse; animation-duration: 2.2s; }
+@keyframes flow { to { stroke-dashoffset: -34; } }
+.map .node { fill: #1f1a16; stroke: rgba(255, 210, 160, .35); }
+.map .core { fill: #2a1e16; stroke: var(--amber); stroke-width: 1.5; }
+.map .pulse { fill: none; stroke: var(--amber); transform-box: fill-box; transform-origin: center; animation: pulse 2.8s var(--ease) infinite; }
+@keyframes pulse { from { opacity: .7; transform: scale(1); } to { opacity: 0; transform: scale(1.9); } }
+.map text { font-family: var(--mono); font-size: var(--fs-sm); fill: var(--text); text-anchor: middle; dominant-baseline: central; }
+.map text.sat { font-size: var(--fs-xs); fill: var(--muted); }
+.map text.core-t { font-weight: 600; fill: var(--amber-soft); }
+
+/* stats */
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); border-block: 1px solid var(--line); }
+.stat { padding: 28px 20px 28px 0; }
+.stat + .stat { padding-left: 24px; border-left: 1px solid var(--line); }
+.stat b { display: block; font: 600 var(--fs-h2)/1 var(--mono); letter-spacing: -.03em; }
+.stat span { display: block; margin-top: 10px; color: var(--muted); font-size: var(--fs-sm); }
+
+/* sections */
+section { padding-block: 96px; }
+.sec-head { display: flex; justify-content: space-between; align-items: end; gap: 24px; flex-wrap: wrap; margin-bottom: 48px; }
+.sec-head h2 { font-size: var(--fs-h2); font-weight: 700; line-height: 1.05; }
+.sec-head p { color: var(--muted); }
+
+.case {
+  display: grid; grid-template-columns: 5fr 7fr; gap: 48px; align-items: center;
+  padding: 40px; border: 1px solid var(--line); border-radius: var(--radius);
+  background: linear-gradient(160deg, rgba(255, 236, 220, .05), rgba(255, 236, 220, .015)); margin-bottom: 28px;
+}
+.case h3 { font-size: var(--fs-xl); font-weight: 600; line-height: 1.2; margin-top: 14px; }
+.role { margin-top: 10px; font: 400 var(--fs-sm)/1.4 var(--mono); color: var(--muted); }
+.case p.desc { margin-top: 16px; color: var(--muted); }
+.ticks { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 10px; }
+.ticks li { display: flex; gap: 10px; align-items: baseline; }
+.ticks li::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--mint); flex: none; transform: translateY(-2px); }
+.tech { margin-top: 22px; padding-top: 16px; border-top: 1px dashed var(--line); font: 400 var(--fs-xs)/1.6 var(--mono); color: var(--muted); letter-spacing: .02em; text-wrap: balance; }
+
+.gallery { display: flex; gap: 16px; justify-content: center; align-items: flex-start; }
+.shot {
+  margin: 0; padding: 0; border: 1px solid var(--line); background: #000; border-radius: 22px; overflow: hidden;
+  width: clamp(130px, 13vw, 168px); flex: none; cursor: zoom-in;
+  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .9);
+  transition: transform .4s var(--ease), box-shadow .4s;
+}
+.shot img { width: 100%; height: auto; aspect-ratio: 9 / 18; object-fit: cover; object-position: top; }
+.gallery .shot:nth-child(even) { translate: 0 28px; }
+@media (hover: hover) { .shot:hover { transform: translateY(-6px) rotate(-1deg); box-shadow: 0 40px 70px -30px rgba(244, 140, 100, .45); } }
+.browser { width: 100%; max-width: 560px; border-radius: 14px; flex: 1 1 auto; }
+.browser::before { content: ""; display: block; height: 26px; background: radial-gradient(circle at 16px 13px, #f4a76b 4px, transparent 5px), radial-gradient(circle at 30px 13px, #8fd8b8 4px, transparent 5px), radial-gradient(circle at 44px 13px, rgba(255, 220, 190, .35) 4px, transparent 5px), #2a2420; }
+.browser img { aspect-ratio: auto; }
+.gallery.mixed { flex-wrap: wrap; }
+.gallery.span { grid-column: 1 / -1; }
+@media (min-width: 961px) { .gallery.mixed .shot:not(.browser) { width: min(168px, calc((100% - 48px) / 4)); } }
+
+.metrics { display: grid; gap: 14px; }
+.metric { display: grid; grid-template-columns: calc(var(--fs-h2) * 2.2) 1fr; align-items: baseline; gap: 18px; padding: 20px 24px; border-radius: 16px; background: rgba(0, 0, 0, .28); border: 1px solid var(--line); }
+.metric b { font: 600 var(--fs-h2)/1 var(--mono); color: var(--amber); letter-spacing: -.03em; }
+.metric span { color: var(--text); }
+
+.side { display: grid; grid-template-columns: 1.25fr 1fr; gap: 28px; }
+.side .case { grid-template-columns: 1fr; margin: 0; align-content: start; }
+.side .gallery { justify-content: flex-start; }
+.side .shot { width: clamp(110px, 10vw, 140px); }
+.ai-list { list-style: none; padding: 0; margin: 18px 0 0; display: grid; gap: 14px; }
+.ai-list li { padding: 18px 20px; border-radius: 16px; background: rgba(0, 0, 0, .28); border: 1px solid var(--line); }
+.ai-list b { display: block; font-weight: 600; }
+.ai-list span { color: var(--muted); font-size: var(--fs-sm); }
+
+.contact { text-align: center; position: relative; isolation: isolate; }
+.contact::before { content: ""; position: absolute; inset: 0; z-index: -1; background: radial-gradient(45% 60% at 50% 60%, rgba(244, 167, 107, .14), transparent 70%); }
+.contact h2 { font-size: var(--fs-h1); font-weight: 700; line-height: 1; }
+.contact p { color: var(--muted); margin-top: 16px; }
+.mail { display: inline-block; margin-top: 28px; font: 500 var(--fs-xl)/1.3 var(--mono); color: var(--amber-soft); text-decoration: none; border-bottom: 1px solid rgba(255, 210, 160, .35); word-break: break-all; }
+.mail:hover { border-bottom-color: var(--amber-soft); }
+.contact .cta { justify-content: center; }
+footer { padding-block: 32px calc(32px + env(safe-area-inset-bottom, 0px)); border-top: 1px solid var(--line); color: var(--muted); font: 400 var(--fs-xs)/1 var(--mono); }
+
+dialog { padding: 0; border: 0; background: transparent; max-width: min(92vw, 1100px); max-height: 92vh; }
+dialog::backdrop { background: rgba(10, 8, 7, .86); backdrop-filter: blur(6px); }
+dialog img { max-height: 88vh; width: auto; border-radius: 16px; margin: 0 auto; }
+dialog form { display: flex; justify-content: center; margin-top: 12px; }
+@media (max-width: 760px) {
+  dialog.wide { overflow-x: auto; }
+  dialog.wide img { width: 220vw; max-width: none; max-height: none; }
+  dialog.wide form { position: sticky; left: 0; width: 92vw; }
+}
+
+.reveal.in { animation: rise .9s var(--ease) both; }
+@keyframes rise { from { opacity: 0; transform: translateY(20px); } }
+
+@media (max-width: 960px) {
+  .hero-grid, .case, .side { grid-template-columns: 1fr; }
+  .hero { padding-top: 40px; }
+  .map { max-width: 520px; margin-inline: auto; }
+  .stats { grid-template-columns: repeat(2, 1fr); }
+  .stat:nth-child(3) { padding-left: 0; border-left: 0; }
+  .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
+  .case { padding: 28px 22px; gap: 32px; }
+  .gallery { justify-content: flex-start; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 36px; margin-inline: -22px; padding-inline: 22px; scrollbar-width: none; }
+  .gallery::-webkit-scrollbar { display: none; }
+  .shot { scroll-snap-align: start; width: 46vw; max-width: 200px; }
+  .gallery.mixed { flex-wrap: nowrap; }
+  .browser { width: 82vw; max-width: 520px; flex: none; }
+}
+@media (max-width: 560px) {
+  .nav a:not(.btn) { display: none; }
+  section { padding-block: 72px; }
+  .metric { grid-template-columns: 1fr; gap: 6px; padding: 18px 20px; }
+  .stat { padding: 22px 12px 22px 0; }
+  .stat + .stat { padding-left: 16px; }
+  .stat:nth-child(3) { padding-left: 0; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-down" viewBox="0 0 24 24"><path d="M12 4v12m0 0-5-5m5 5 5-5M5 20h14"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="m4 7 8 6 8-6"/></symbol>
+  <symbol id="i-gh" viewBox="0 0 24 24"><path d="M9 19c-4 1.3-4-2-6-2.5m12 4.5v-3.4a3 3 0 0 0-.8-2.3c2.8-.3 5.8-1.4 5.8-6.2a4.8 4.8 0 0 0-1.3-3.3 4.5 4.5 0 0 0-.1-3.3s-1-.3-3.4 1.3a11.6 11.6 0 0 0-6.2 0C6.6 2.2 5.6 2.5 5.6 2.5a4.5 4.5 0 0 0-.1 3.3A4.8 4.8 0 0 0 4.2 9c0 4.8 3 5.9 5.8 6.2a3 3 0 0 0-.8 2.3V21"/></symbol>
+</svg>
+<a class="skip" href="#work">Skip to work</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="logo" href="#top">LVT<b>.</b></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#work">Work</a>
+      <a href="#after-hours">Projects</a>
+      <a href="#contact">Contact</a>
+      <a class="btn btn-ghost" href="Le-Van-Tung-CV.pdf" download>CV</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="kicker">Full-Stack Engineer · Team Lead</p>
+        <h1>Le Van Tung</h1>
+        <p class="tagline">I build the systems Vietnamese <em>retail</em> runs on.</p>
+        <p class="lead">Commerce, loyalty and integrations · Ho&nbsp;Chi&nbsp;Minh&nbsp;City</p>
+        <div class="cta">
+          <a class="btn btn-primary" href="Le-Van-Tung-CV.pdf" download><svg class="i"><use href="#i-down"/></svg>Download CV</a>
+          <a class="btn btn-ghost" href="mailto:prog.tunglv@gmail.com"><svg class="i"><use href="#i-mail"/></svg>Email me</a>
+        </div>
+      </div>
+      <svg class="map" viewBox="0 0 520 440" role="img" aria-label="Four products around one platform: Commerce, Rewards, Trade and Connect">
+        <path class="wire" d="M260 220 L120 110"/><path class="wire" d="M260 220 L400 110"/>
+        <path class="wire" d="M260 220 L400 330"/><path class="wire" d="M260 220 L120 330"/>
+        <path class="wire" d="M120 110 L120 56"/><path class="wire" d="M400 110 L400 56"/>
+        <path class="wire" d="M400 330 L400 386"/><path class="wire" d="M120 330 L120 386"/>
+        <path class="flow" d="M120 56 L120 110 L260 220"/>
+        <path class="flow alt" d="M260 220 L400 110 L400 56"/>
+        <path class="flow" d="M400 386 L400 330 L260 220"/>
+        <path class="flow alt" d="M260 220 L120 330 L120 386"/>
+        <circle class="pulse" cx="260" cy="220" r="44"/>
+        <circle class="core" cx="260" cy="220" r="44"/>
+        <text class="core-t" x="260" y="220">MiniAI</text>
+        <rect class="node" x="55" y="88" width="130" height="44" rx="22"/><text x="120" y="110">Commerce</text>
+        <rect class="node" x="335" y="88" width="130" height="44" rx="22"/><text x="400" y="110">Rewards</text>
+        <rect class="node" x="335" y="308" width="130" height="44" rx="22"/><text x="400" y="330">Trade</text>
+        <rect class="node" x="55" y="308" width="130" height="44" rx="22"/><text x="120" y="330">Connect</text>
+        <text class="sat" x="120" y="40">Shopee · TikTok · Lazada</text>
+        <text class="sat" x="400" y="40">Zalo Mini App</text>
+        <text class="sat" x="400" y="402">Claude · Gemini</text>
+        <text class="sat" x="120" y="402">Sapo · GHN · SPX</text>
+      </svg>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <div class="stats">
+      <div class="stat"><b>4+</b><span>years shipping SaaS</span></div>
+      <div class="stat"><b>2,700+</b><span>businesses on the platform</span></div>
+      <div class="stat"><b>4</b><span>products in parallel</span></div>
+      <div class="stat"><b>1,000</b><span>shelf photos AI-scored a round</span></div>
+    </div>
+  </div>
+
+  <section id="work">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>Selected work</h2>
+        <p>Private repos, so here is what they do.</p>
+      </div>
+
+      <article class="case reveal">
+        <div>
+          <p class="kicker">01 · MiniAI Commerce</p>
+          <h3>One back office for every sales channel.</h3>
+          <p class="role">Team Lead · 2022 – now</p>
+          <p class="desc">Backend, admin and the shopper app on Zalo.</p>
+          <p class="tech">Node.js · GraphQL · MongoDB · Kafka · Redis</p>
+        </div>
+        <div class="metrics">
+          <div class="metric"><b>16</b><span>API calls to ship 200 Shopee orders, down from 400</span></div>
+          <div class="metric"><b>24M</b><span>looping Kafka messages stopped</span></div>
+          <div class="metric"><b>20+</b><span>modules, from data model to production</span></div>
+        </div>
+        <div class="gallery span">
+          <button class="shot" type="button" aria-label="Enlarge: baby formula shop"><img src="img/app-canamart.jpg" alt="Baby formula shop on Zalo Mini App" loading="lazy" width="420" height="909"></button>
+          <button class="shot" type="button" aria-label="Enlarge: coconut drinks shop"><img src="img/app-coco365.jpg" alt="Coconut drinks shop menu on Zalo Mini App" loading="lazy" width="420" height="909"></button>
+          <button class="shot" type="button" aria-label="Enlarge: tea and coffee shop"><img src="img/app-zenzy.jpg" alt="Tea and coffee shop on Zalo Mini App" loading="lazy" width="420" height="909"></button>
+        </div>
+      </article>
+
+      <article class="case reveal">
+        <div>
+          <p class="kicker">02 · MiniAI Rewards</p>
+          <h3>Loyalty apps brands put their own name on.</h3>
+          <p class="role">Full-Stack · 2025 – now</p>
+          <ul class="ticks">
+            <li>One white-label app for 200+ businesses</li>
+            <li>Spin rewards safe under concurrent opens</li>
+            <li>Analytics SDK with 15 event types</li>
+          </ul>
+          <p class="tech">NestJS · MongoDB · BullMQ · Socket.io</p>
+        </div>
+        <div class="gallery">
+          <button class="shot" type="button" aria-label="Enlarge: brand app home"><img src="img/mena-explore.jpg" alt="Brand loyalty app home screen" loading="lazy" width="420" height="911"></button>
+          <button class="shot" type="button" aria-label="Enlarge: voucher offers"><img src="img/mena-offers.jpg" alt="Voucher offers screen" loading="lazy" width="420" height="911"></button>
+          <button class="shot" type="button" aria-label="Enlarge: points ranking"><img src="img/jvf-ranking.jpg" alt="Farmer points ranking screen" loading="lazy" width="420" height="831"></button>
+          <button class="shot" type="button" aria-label="Enlarge: Tet minigame"><img src="img/mg-tet.jpg" alt="Lunar New Year minigame" loading="lazy" width="420" height="741"></button>
+        </div>
+      </article>
+
+      <article class="case reveal">
+        <div>
+          <p class="kicker">03 · MiniAI Trade</p>
+          <h3>From empty repo to a live event in a week.</h3>
+          <p class="role">Founding Engineer · 2026</p>
+          <ul class="ticks">
+            <li>Check-in and tiered ordering for ~100 guests</li>
+            <li>AI scores shelf photos and shows what it saw</li>
+            <li>Bar survey that ends in a QR gift ticket</li>
+          </ul>
+          <p class="tech">Next.js 15 · PostgreSQL · Prisma · Claude API</p>
+        </div>
+        <div class="gallery mixed">
+          <button class="shot browser" type="button" aria-label="Enlarge: display scoring screen"><img src="img/rd-ai-seen.jpg" alt="Display scoring with the gift baskets the AI counted" loading="lazy" width="1100" height="687"></button>
+          <button class="shot" type="button" aria-label="Enlarge: event products"><img src="img/td-products.jpg" alt="Trade dinner product list with discount tier bar" loading="lazy" width="420" height="851"></button>
+          <button class="shot" type="button" aria-label="Enlarge: placed order"><img src="img/td-placed.jpg" alt="Placed order grouped by flash sale and collection" loading="lazy" width="420" height="851"></button>
+          <button class="shot" type="button" aria-label="Enlarge: survey question"><img src="img/cs-question.jpg" alt="Whisky bar survey question" loading="lazy" width="420" height="851"></button>
+          <button class="shot" type="button" aria-label="Enlarge: gift ticket"><img src="img/cs-ticket.jpg" alt="Gift ticket with QR code" loading="lazy" width="420" height="818"></button>
+        </div>
+      </article>
+
+      <article class="case reveal">
+        <div>
+          <p class="kicker">04 · MiniAI Rewards</p>
+          <h3>A scratch-off tag that proves a part is real.</h3>
+          <p class="role">Full-Stack · 2026</p>
+          <ul class="ticks">
+            <li>Scan to verify, scratch to start warranty</li>
+            <li>Mechanics earn points for each fitted part</li>
+            <li>Batches, dealers and fake reports in one admin</li>
+          </ul>
+          <p class="tech">NestJS · MongoDB · React · Zalo Mini App</p>
+        </div>
+        <div class="gallery mixed">
+          <button class="shot browser" type="button" aria-label="Enlarge: tag batches admin"><img src="img/bd-admin.jpg" alt="Admin list of tag batches waiting to be released" loading="lazy" width="1100" height="456"></button>
+          <button class="shot" type="button" aria-label="Enlarge: genuine tag"><img src="img/bd-genuine.jpg" alt="Tag check showing a genuine part" loading="lazy" width="420" height="851"></button>
+          <button class="shot" type="button" aria-label="Enlarge: tag activation"><img src="img/bd-activate.jpg" alt="Tag activation with the scratch-off code" loading="lazy" width="420" height="851"></button>
+        </div>
+      </article>
+
+      <article class="case reveal">
+        <div>
+          <p class="kicker">05 · MiniAI Connect</p>
+          <h3>Webhooks that never drop an order.</h3>
+          <p class="role">Backend · 2025 – now</p>
+          <p class="desc">POS, ERP and carrier sync behind one platform.</p>
+          <p class="tech">TypeScript · Express · Prisma · Odoo XML-RPC</p>
+        </div>
+        <div class="metrics">
+          <div class="metric"><b>82</b><span>stalled shipments recovered by one backfill</span></div>
+          <div class="metric"><b>11</b><span>Sapo webhooks set up on connect</span></div>
+          <div class="metric"><b>0</b><span>paid orders flipping back to unpaid</span></div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="after-hours">
+    <div class="wrap">
+      <div class="sec-head">
+        <h2>After hours</h2>
+      </div>
+      <div class="side">
+        <article class="case reveal">
+          <div>
+            <p class="kicker">Unity 6 · Solo</p>
+            <h3>Sapa Pup</h3>
+            <p class="desc">A sled runner through Sa Pa, played with one finger.</p>
+            <p class="tech">7,000 lines of C# · 94 tests</p>
+          </div>
+          <div class="gallery">
+            <button class="shot" type="button" aria-label="Enlarge: game menu"><img src="img/pup-menu.jpg" alt="Sapa Pup menu" loading="lazy" width="420" height="933"></button>
+            <button class="shot" type="button" aria-label="Enlarge: launch"><img src="img/pup-launch.jpg" alt="Bamboo spring launch" loading="lazy" width="420" height="933"></button>
+            <button class="shot" type="button" aria-label="Enlarge: chasm jump"><img src="img/pup-chasm.jpg" alt="Jumping a chasm" loading="lazy" width="420" height="933"></button>
+          </div>
+        </article>
+        <article class="case reveal">
+          <div>
+            <p class="kicker">Swift · Claude Code</p>
+            <h3>AI that works beside me</h3>
+            <ul class="ai-list">
+              <li><b>Meeting Copilot</b><span>Live transcript, English replies drafted</span></li>
+              <li><b>23 agent skills</b><span>Plan, ticket, PR and worklog on autopilot</span></li>
+            </ul>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="wrap">
+      <h2 class="reveal">Let's talk.</h2>
+      <p>Open to full-stack and backend roles.</p>
+      <a class="mail" href="mailto:prog.tunglv@gmail.com">prog.tunglv@gmail.com</a>
+      <div class="cta">
+        <a class="btn btn-primary" href="Le-Van-Tung-CV.pdf" download><svg class="i"><use href="#i-down"/></svg>Download CV</a>
+        <a class="btn btn-ghost" href="https://github.com/lvtung-dev" target="_blank" rel="noopener"><svg class="i"><use href="#i-gh"/></svg>GitHub</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap">© 2026 Le Van Tung</div></footer>
+
+<dialog id="zoom" aria-label="Screenshot">
+  <img alt="">
+  <form method="dialog"><button class="btn btn-ghost" type="submit">Close</button></form>
+</dialog>
+
+<script>
+(function () {
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var top = document.querySelector('.top');
+  window.addEventListener('scroll', function () { top.classList.toggle('scrolled', window.scrollY > 8); }, { passive: true });
+
+  var zoom = document.getElementById('zoom');
+  var zoomImg = zoom.querySelector('img');
+  document.querySelectorAll('.shot').forEach(function (shot) {
+    shot.addEventListener('click', function () {
+      var img = shot.querySelector('img');
+      zoomImg.src = img.src;
+      zoomImg.alt = img.alt;
+      zoom.classList.toggle('wide', img.naturalWidth > img.naturalHeight);
+      zoom.showModal();
+      zoom.scrollLeft = 0;
+    });
+  });
+  zoom.addEventListener('click', function (e) {
+    if (e.target === zoom || e.target === zoomImg) {
+      zoom.close();
+    }
+  });
+
+  if ('IntersectionObserver' in window && !reduceMotion) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (en) {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { rootMargin: '0px 0px 12% 0px' });
+    document.querySelectorAll('.reveal').forEach(function (el) {
+      if (el.getBoundingClientRect().top > window.innerHeight) {
+        io.observe(el);
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
